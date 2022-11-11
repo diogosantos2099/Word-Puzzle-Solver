@@ -2,6 +2,6 @@
 {
     public interface ILoadWordDictionary
     {
-        Task<string[]> LoadDictionary(string path, int wordLength);
+        Task<string[]> LoadDictionary(string path, int desiredWordLength);
     }
 }

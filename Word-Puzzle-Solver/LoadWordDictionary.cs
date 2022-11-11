@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 
 namespace Word_Puzzle_Solver
 {
@@ -13,10 +8,10 @@ namespace Word_Puzzle_Solver
     /// </summary>
     public class LoadWordDictionary : ILoadWordDictionary
     {
-        public async Task<string[]> LoadDictionary(string path, int wordLength)
+        public async Task<string[]> LoadDictionary(string path, int desiredWordLength)
         {
             var fullDictionary = await File.ReadAllLinesAsync(path);
-            return RemoveUndesirables(fullDictionary, wordLength);
+            return RemoveUndesirables(fullDictionary, desiredWordLength);
         }
 
         private static string[] RemoveUndesirables(string[] dictionary, int length)
@@ -33,7 +28,8 @@ namespace Word_Puzzle_Solver
 
         private static string[] RemoveNonWords(string[] dictionary)
         {
-            Regex rgx = new Regex("^[a-zA-Z]+$", RegexOptions.Multiline);
+            // allow only upper case and lower case letters
+            Regex rgx = new("^[a-zA-Z]+$", RegexOptions.Multiline);
             return dictionary.Where(x => rgx.IsMatch(x)).ToArray();
         }
     }
