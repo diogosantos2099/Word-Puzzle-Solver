@@ -4,16 +4,13 @@ using Word_Puzzle_Solver;
 
 internal class ConsoleService : IHostedService
 {
-    private readonly ILogger _logger;
     private readonly ILoadWordDictionary _loadWordDictionary;
     private readonly IValidateInput _validateInput;
 
     public ConsoleService(
-    ILogger<ConsoleService> logger,
     ILoadWordDictionary loadWordDictionary,
     IValidateInput validateInput)
     {
-        _logger = logger;
         _loadWordDictionary = loadWordDictionary;
         _validateInput = validateInput;
     }
@@ -22,8 +19,6 @@ internal class ConsoleService : IHostedService
     {
         Task.Run(async () =>
         {
-            _logger.LogTrace("initializing-console-app");
-
             Console.WriteLine("Usage: DictionaryFile StartWord EndWord\n");
             Console.WriteLine("Options:");
             Console.WriteLine("DictionaryFile - the file name of a text file containing four letter words (with file extension)");
@@ -42,7 +37,6 @@ internal class ConsoleService : IHostedService
                 return;
             }
 
-            _logger.LogTrace("loading-dictionary");
             var wordUniverse = await _loadWordDictionary.LoadDictionary(validatedInput.DictionaryFile!, 4);
         }, cancellationToken);
 
