@@ -1,7 +1,12 @@
-﻿string[] dictionaryFile = System.IO.File.ReadAllLines(@"words-english.txt");
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Word_Puzzle_Solver;
 
-foreach (string word in dictionaryFile)
-{
-    Console.WriteLine(word);
-}
-System.Console.ReadKey();
+using IHost host = Host.CreateDefaultBuilder(args)
+    .ConfigureServices((_, services) =>
+        services
+        .AddHostedService<ConsoleService>()
+        .AddSingleton<ILoadWordDictionary, LoadWordDictionary>())
+    .Build();
+
+await host.RunAsync();
