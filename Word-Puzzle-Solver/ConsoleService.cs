@@ -6,13 +6,16 @@ internal class ConsoleService : IHostedService
 {
     private readonly ILogger _logger;
     private readonly ILoadWordDictionary _loadWordDictionary;
+    private readonly IValidateInput _validateInput;
 
     public ConsoleService(
     ILogger<ConsoleService> logger,
-    ILoadWordDictionary loadWordDictionary)
+    ILoadWordDictionary loadWordDictionary,
+    IValidateInput validateInput)
     {
         _logger = logger;
         _loadWordDictionary = loadWordDictionary;
+        _validateInput = validateInput;
     }
 
     public Task StartAsync(CancellationToken cancellationToken)
@@ -21,31 +24,27 @@ internal class ConsoleService : IHostedService
         {
             _logger.LogTrace("initializing-console-app");
 
-            Console.WriteLine("Usage: DictionaryFile StartWord EndWord");
-            Console.WriteLine();
+            Console.WriteLine("Usage: DictionaryFile StartWord EndWord\n");
             Console.WriteLine("Options:");
             Console.WriteLine("DictionaryFile - the file name of a text file containing four letter words (with file extension)");
             Console.WriteLine("StartWord - 4 characters long");
-            Console.WriteLine("EndWord - 4 characters long");
-            Console.WriteLine();
-            Console.WriteLine("Ex: words-english.txt Spin Spot");
-            Console.WriteLine();
+            Console.WriteLine("EndWord - 4 characters long\n");
+            Console.WriteLine("Ex: words-english.txt Spin Spot\n");
             Console.WriteLine("Please type input parameters:");
 
             var userInput = Console.ReadLine();
 
-            var errors = ValidateInputFromUser(userInput);
+            var validatedInput = _validateInput.ValidateInputFromUser(userInput);
 
-            if (errors.Any())
+            if (validatedInput.Errors.Any())
             {
-                Array.ForEach(errors.ToArray(), Console.WriteLine);
+                Array.ForEach(validatedInput.Errors.ToArray(), Console.WriteLine);
                 return;
             }
 
             _logger.LogTrace("loading-dictionary");
-            //TODO: replace "words-english.txt" with constant from input
-            var wordUniverse = await _loadWordDictionary.LoadDictionary(@"words-english.txt", 4);
-        });
+            var wordUniverse = await _loadWordDictionary.LoadDictionary(validatedInput.DictionaryFile!, 4);
+        }, cancellationToken);
 
         return Task.CompletedTask;
     }
@@ -53,47 +52,5 @@ internal class ConsoleService : IHostedService
     public Task StopAsync(CancellationToken cancellationToken)
     {
         return Task.CompletedTask;
-    }
-
-    static List<string> ValidateInputFromUser(string? userInput)
-    {
-        List<string> errors = new();
-
-        if (string.IsNullOrEmpty(userInput))
-        {
-            errors.Add("Error: Input not provided");
-            return errors;
-        }
-
-        string[] args = userInput.Split(" ");
-        if (args.Length != 3)
-        {
-            errors.Add("Error: Input must be 3 parameters long: DictionaryFile StartWord EndWord");
-            return errors;
-        }
-
-        string[] availableDictionaries = { "words-english.txt" };
-        string dictionary = args[0];
-        string startWord = args[1];
-        string endWord = args[2];
-
-        if (!availableDictionaries.Contains(dictionary))
-        {
-            errors.Add($"Error: Input '{dictionary}' invalid. Available dictionaries: {string.Join("\n", availableDictionaries)}");
-        }
-
-        ValidateWordLength(errors, startWord);
-
-        ValidateWordLength(errors, endWord);
-
-        return errors;
-    }
-
-    static void ValidateWordLength(List<string> errors, string word)
-    {
-        if (word.Length != 4)
-        {
-            errors.Add($"Error: Input '{word}.length' must be equal to 4");
-        }
     }
 }

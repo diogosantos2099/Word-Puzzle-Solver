@@ -6,7 +6,8 @@ using IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((_, services) =>
         services
         .AddHostedService<ConsoleService>()
-        .AddSingleton<ILoadWordDictionary, LoadWordDictionary>())
+        .AddSingleton<ILoadWordDictionary, LoadWordDictionary>()
+        .AddSingleton<IValidateInput, ValidateInput>())
     .Build();
 
 await host.RunAsync();
