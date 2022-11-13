@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Word_Puzzle_Solver;
+using Word_Puzzle_Solver.Algorithms;
+using Word_Puzzle_Solver.Interfaces;
 
 using IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((_, services) =>

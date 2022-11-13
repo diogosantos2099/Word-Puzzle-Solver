@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using Word_Puzzle_Solver.Interfaces;
 
 namespace Word_Puzzle_Solver
 {

@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
+using Word_Puzzle_Solver.Algorithms.Base;
 
-namespace Word_Puzzle_Solver
+namespace Word_Puzzle_Solver.Algorithms
 {
     /// <summary>
     /// First algorithm implemented for the puzzle word solving problem.
@@ -74,7 +75,7 @@ namespace Word_Puzzle_Solver
                     possiblePaths.Add(currentPath);
                     return;
                 }
-                
+
                 // remove duplicates from candidates
                 var realCandidates = wordCandidates.Except(currentPath).ToList();
 
@@ -89,7 +90,7 @@ namespace Word_Puzzle_Solver
                     };
                     // add path
                     possiblePaths.Add(newPathFound);
-                }   
+                }
             }
 
             // if we haven't found endWord yet, keep exploring

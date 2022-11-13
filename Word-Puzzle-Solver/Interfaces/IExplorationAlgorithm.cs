@@ -1,4 +1,4 @@
-﻿namespace Word_Puzzle_Solver
+﻿namespace Word_Puzzle_Solver.Interfaces
 {
     public interface IExplorationAlgorithm
     {

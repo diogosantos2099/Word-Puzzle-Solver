@@ -1,4 +1,6 @@
-﻿namespace Word_Puzzle_Solver
+﻿using Word_Puzzle_Solver.Interfaces;
+
+namespace Word_Puzzle_Solver
 {
     public class OutputGenerator : IOutputGenerator
     {

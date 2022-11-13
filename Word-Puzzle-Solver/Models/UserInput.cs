@@ -1,4 +1,4 @@
-﻿namespace Word_Puzzle_Solver
+﻿namespace Word_Puzzle_Solver.Models
 {
     /// <summary>
     /// User input Data structured in object format.
@@ -28,7 +28,7 @@
         /// </summary>
         public List<string> Errors { get; set; }
 
-        public UserInput() 
+        public UserInput()
         {
             DictionaryFile = string.Empty;
             StartWord = string.Empty;

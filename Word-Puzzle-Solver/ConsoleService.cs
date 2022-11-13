@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Word_Puzzle_Solver;
+using Word_Puzzle_Solver.Interfaces;
 
 internal class ConsoleService : IHostedService
 {

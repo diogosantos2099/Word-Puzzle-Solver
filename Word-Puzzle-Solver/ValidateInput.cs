@@ -1,4 +1,7 @@
-﻿namespace Word_Puzzle_Solver
+﻿using Word_Puzzle_Solver.Interfaces;
+using Word_Puzzle_Solver.Models;
+
+namespace Word_Puzzle_Solver
 {
     /// <summary>
     /// Responsible for validating the input from the user.
