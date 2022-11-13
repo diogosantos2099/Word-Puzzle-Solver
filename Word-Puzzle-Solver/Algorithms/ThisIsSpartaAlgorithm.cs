@@ -45,22 +45,7 @@ namespace Word_Puzzle_Solver.Algorithms
                 possiblePaths.Remove(currentPath);
 
                 var wordArray = currentPath.Last().ToCharArray();
-                var wordCandidates = new List<string>();
-
-                // for each letter in the word of the last element
-                for (int i = 0; i < wordArray.Length; i++)
-                {
-                    string originalWord = new(wordArray);
-
-                    string replace = $"[^{wordArray[i]}]";
-                    string expression = originalWord.Remove(i, 1).Insert(i, replace);
-
-                    // Get all words from dictionary that match every character except this one
-                    Regex rgx = new(expression, RegexOptions.IgnoreCase);
-
-                    // add all of these words as candidates
-                    wordCandidates.AddRange(wordUniverse.Where(x => rgx.IsMatch(x)).ToList());
-                }
+                List<string> wordCandidates = GetWordCandidates(wordUniverse, wordArray);
 
                 // If no words exist, currentPath is a dead end
                 if (!wordCandidates.Any())
@@ -95,6 +80,28 @@ namespace Word_Puzzle_Solver.Algorithms
 
             // if we haven't found endWord yet, keep exploring
             ExplorePossiblePaths(possiblePaths, endWord, wordUniverse);
+        }
+
+        private static List<string> GetWordCandidates(string[] wordUniverse, char[] wordArray)
+        {
+            var wordCandidates = new List<string>();
+
+            // for each letter in the word of the last element
+            for (int i = 0; i < wordArray.Length; i++)
+            {
+                string originalWord = new(wordArray);
+
+                string replace = $"[^{wordArray[i]}]";
+                string expression = originalWord.Remove(i, 1).Insert(i, replace);
+
+                // Get all words from dictionary that match every character except this one
+                Regex rgx = new(expression, RegexOptions.IgnoreCase);
+
+                // add all of these words as candidates
+                wordCandidates.AddRange(wordUniverse.Where(x => rgx.IsMatch(x)).ToList());
+            }
+
+            return wordCandidates;
         }
     }
 }
