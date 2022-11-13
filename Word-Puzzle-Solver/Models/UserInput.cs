@@ -1,8 +1,11 @@
-﻿namespace Word_Puzzle_Solver.Models
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Word_Puzzle_Solver.Models
 {
     /// <summary>
     /// User input Data structured in object format.
     /// </summary>
+    [ExcludeFromCodeCoverage]
     public class UserInput
     {
         /// <summary>

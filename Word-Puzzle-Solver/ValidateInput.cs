@@ -8,23 +8,21 @@ namespace Word_Puzzle_Solver
     /// Returns object with list of failed validations, if any occur.
     /// </summary>
     public class ValidateInput : IValidateInput
-    {
-        private readonly string[] AvailableDictionaries = { "words-english.txt" };
-        
+    {      
         public UserInput ValidateInputFromUser(string? userInput)
         {
             UserInput validatedInput = new();
 
             if (string.IsNullOrEmpty(userInput))
             {
-                validatedInput.Errors.Add("Error: Input not provided");
+                validatedInput.Errors.Add(Constants.NoInputProvided);
                 return validatedInput;
             }
 
             string[] args = userInput.Split(" ");
             if (args.Length != Constants.ArgsExpected)
             {
-                validatedInput.Errors.Add($"Error: Input must be {Constants.ArgsExpected} parameters long: DictionaryFile StartWord EndWord");
+                validatedInput.Errors.Add(Constants.WrongNrArgsProvided);
                 return validatedInput;
             }
 
@@ -32,9 +30,9 @@ namespace Word_Puzzle_Solver
             validatedInput.StartWord = args[1];
             validatedInput.EndWord = args[2];
 
-            if (!AvailableDictionaries.Contains(validatedInput.DictionaryFile))
+            if (!Constants.AvailableDictionaries.Contains(validatedInput.DictionaryFile))
             {
-                validatedInput.Errors.Add($"Error: Input '{validatedInput.DictionaryFile}' invalid. Available dictionaries: {string.Join("\n", AvailableDictionaries)}");
+                validatedInput.Errors.Add($"Error: Input '{validatedInput.DictionaryFile}' invalid. Available dictionaries: {string.Join("\n", Constants.AvailableDictionaries)}");
             }
 
             ValidateWordLength(validatedInput, validatedInput.StartWord);

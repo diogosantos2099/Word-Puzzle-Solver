@@ -9,6 +9,7 @@ using IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((_, services) =>
         services
         .AddHostedService<ConsoleService>()
+        .AddSingleton<IReadInput, ReadInput>()
         .AddSingleton<ILoadWordDictionary, LoadWordDictionary>()
         .AddSingleton<IValidateInput, ValidateInput>()
         .AddSingleton<IExplorationAlgorithm, ThisIsSpartaAlgorithm>()

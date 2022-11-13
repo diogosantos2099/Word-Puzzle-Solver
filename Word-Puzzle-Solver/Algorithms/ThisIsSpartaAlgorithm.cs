@@ -78,6 +78,11 @@ namespace Word_Puzzle_Solver.Algorithms
                 }
             }
 
+            // check if there are still possible paths
+            if (!possiblePaths.Any())
+            {
+                return; 
+            }
             // if we haven't found endWord yet, keep exploring
             ExplorePossiblePaths(possiblePaths, endWord, wordUniverse);
         }
