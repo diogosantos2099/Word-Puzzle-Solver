@@ -6,6 +6,8 @@ namespace Word_Puzzle_Solver
     {
         public override LinkedList<string> CalculateShortestPath(string startWord, string endWord, string[] wordUniverse)
         {
+            StartTimer();
+
             var shortestPath = new LinkedList<string>();
             shortestPath.AddFirst(startWord);
 
@@ -18,6 +20,7 @@ namespace Word_Puzzle_Solver
 
             shortestPath = possiblePaths.First(x => x.Last() == endWord);
 
+            StopTimer();
             return shortestPath;
         }
 
