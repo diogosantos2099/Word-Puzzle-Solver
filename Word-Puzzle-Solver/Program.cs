@@ -10,6 +10,7 @@ using IHost host = Host.CreateDefaultBuilder(args)
         .AddSingleton<ILoadWordDictionary, LoadWordDictionary>()
         .AddSingleton<IValidateInput, ValidateInput>()
         .AddSingleton<IExplorationAlgorithm, ThisIsSpartaAlgorithm>()
+        .AddSingleton<IOutputGenerator, OutputGenerator>()
         .AddLogging(builder =>
         {
             builder.AddFilter("Microsoft", LogLevel.None)
