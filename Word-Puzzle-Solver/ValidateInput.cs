@@ -7,8 +7,6 @@
     public class ValidateInput : IValidateInput
     {
         private readonly string[] AvailableDictionaries = { "words-english.txt" };
-        private const int ArgsExpected = 3;
-        private const int WordLengthExpected = 4;
         
         public UserInput ValidateInputFromUser(string? userInput)
         {
@@ -21,9 +19,9 @@
             }
 
             string[] args = userInput.Split(" ");
-            if (args.Length != ArgsExpected)
+            if (args.Length != Constants.ArgsExpected)
             {
-                validatedInput.Errors.Add($"Error: Input must be {ArgsExpected} parameters long: DictionaryFile StartWord EndWord");
+                validatedInput.Errors.Add($"Error: Input must be {Constants.ArgsExpected} parameters long: DictionaryFile StartWord EndWord");
                 return validatedInput;
             }
 
@@ -45,9 +43,9 @@
 
         private static void ValidateWordLength(UserInput validatedInput, string word)
         {
-            if (word.Length != WordLengthExpected)
+            if (word.Length != Constants.DesiredWordLength)
             {
-                validatedInput.Errors.Add($"Error: Input '{word}.length' must be equal to {WordLengthExpected}");
+                validatedInput.Errors.Add($"Error: Input '{word}.length' must be equal to {Constants.DesiredWordLength}");
             }
         }
     }

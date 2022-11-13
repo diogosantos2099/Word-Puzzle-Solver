@@ -6,7 +6,6 @@ internal class ConsoleService : IHostedService
     private readonly ILoadWordDictionary _loadWordDictionary;
     private readonly IValidateInput _validateInput;
     private readonly IExplorationAlgorithm _explorationAlgorithm;
-    private readonly int DesiredWordLength = 4;
 
     public ConsoleService(
     ILoadWordDictionary loadWordDictionary,
@@ -25,8 +24,8 @@ internal class ConsoleService : IHostedService
             Console.WriteLine("Usage: file startWord endWord\n");
             Console.WriteLine("Options:");
             Console.WriteLine("file - the file name of the dictionary (with file extension)");
-            Console.WriteLine($"startWord - {DesiredWordLength} characters long");
-            Console.WriteLine($"endWord - {DesiredWordLength} characters long\n");
+            Console.WriteLine($"startWord - {Constants.DesiredWordLength} characters long");
+            Console.WriteLine($"endWord - {Constants.DesiredWordLength} characters long\n");
             Console.WriteLine("Ex: words-english.txt Spin Spot\n");
             Console.WriteLine("Please type input parameters:");
 
@@ -40,7 +39,7 @@ internal class ConsoleService : IHostedService
                 return;
             }
 
-            string[] wordUniverse = await _loadWordDictionary.LoadDictionary(validatedInput.DictionaryFile!, DesiredWordLength);
+            string[] wordUniverse = await _loadWordDictionary.LoadDictionary(validatedInput.DictionaryFile!, Constants.DesiredWordLength);
             
             Console.WriteLine($"Finished loading Dictionary: {wordUniverse.Length} total available words.");
             

@@ -2,6 +2,10 @@
 
 namespace Word_Puzzle_Solver
 {
+    /// <summary>
+    /// First algorithm implemented for the puzzle word solving problem.
+    /// 'This is Sparta' because it's mostly brute force.
+    /// </summary>
     public class ThisIsSpartaAlgorithm : ExplorationAlgorithm
     {
         public override LinkedList<string> CalculateShortestPath(string startWord, string endWord, string[] wordUniverse)

@@ -9,6 +9,7 @@ namespace Word_Puzzle_Solver
     public abstract class ExplorationAlgorithm : IExplorationAlgorithm
     {
         private readonly Stopwatch _timer = new();
+
         public abstract LinkedList<string> CalculateShortestPath(string startWord, string endWord, string[] wordUniverse);
 
         public void StartTimer()

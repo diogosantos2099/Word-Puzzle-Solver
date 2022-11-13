@@ -1,5 +1,8 @@
 ﻿namespace Word_Puzzle_Solver
 {
+    /// <summary>
+    /// User input Data structured in object format.
+    /// </summary>
     public class UserInput
     {
         /// <summary>
