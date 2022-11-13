@@ -10,7 +10,7 @@ namespace Word_Puzzle_Solver
     {
         private readonly Stopwatch _timer = new();
 
-        public abstract LinkedList<string> CalculateShortestPath(string startWord, string endWord, string[] wordUniverse);
+        public abstract List<string> CalculateShortestPath(string startWord, string endWord, string[] wordUniverse);
 
         public void StartTimer()
         {

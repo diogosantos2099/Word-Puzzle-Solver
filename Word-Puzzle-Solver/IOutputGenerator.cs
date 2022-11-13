@@ -2,6 +2,6 @@
 {
     public interface IOutputGenerator
     {
-        void GenerateOutput(string path, string[] output);
+        void GenerateOutput(string path, List<string> output);
     }
 }

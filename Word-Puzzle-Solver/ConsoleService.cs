@@ -42,9 +42,9 @@ internal class ConsoleService : IHostedService
 
                 Console.WriteLine($"Finished loading Dictionary: {wordUniverse.Length} total available words.");
 
-                LinkedList<string> result = _explorationAlgorithm.CalculateShortestPath(validatedInput.StartWord.ToLower(), validatedInput.EndWord.ToLower(), wordUniverse);
+                List<string> result = _explorationAlgorithm.CalculateShortestPath(validatedInput.StartWord.ToLower(), validatedInput.EndWord.ToLower(), wordUniverse);
 
-                _outputGenerator.GenerateOutput(Constants.OutputDir, result.ToArray());
+                _outputGenerator.GenerateOutput(Constants.OutputDir, result);
 
                 Console.WriteLine("Solution:");
                 Console.WriteLine(string.Join("->", result.Select(x => x)));

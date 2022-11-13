@@ -8,14 +8,16 @@ namespace Word_Puzzle_Solver
     /// </summary>
     public class ThisIsSpartaAlgorithm : ExplorationAlgorithm
     {
-        public override LinkedList<string> CalculateShortestPath(string startWord, string endWord, string[] wordUniverse)
+        public override List<string> CalculateShortestPath(string startWord, string endWord, string[] wordUniverse)
         {
             StartTimer();
 
-            var shortestPath = new LinkedList<string>();
-            shortestPath.AddFirst(startWord);
+            var shortestPath = new List<string>
+            {
+                startWord
+            };
 
-            var possiblePaths = new List<LinkedList<string>>()
+            var possiblePaths = new List<List<string>>()
             {
                 new(shortestPath)
             };
@@ -28,13 +30,13 @@ namespace Word_Puzzle_Solver
             return shortestPath;
         }
 
-        private void ExplorePossiblePaths(List<LinkedList<string>> possiblePaths, string endWord, string[] wordUniverse)
+        private void ExplorePossiblePaths(List<List<string>> possiblePaths, string endWord, string[] wordUniverse)
         {
             // create copy
-            var currentPossiblePaths = new List<LinkedList<string>>(possiblePaths);
+            var currentPossiblePaths = new List<List<string>>(possiblePaths);
 
             // iteration
-            foreach (LinkedList<string> currentPath in currentPossiblePaths)
+            foreach (List<string> currentPath in currentPossiblePaths)
             {
                 // start by removing this path from possiblePaths
                 // if currentPath turns out not to be a dead end,
@@ -68,26 +70,26 @@ namespace Word_Puzzle_Solver
                 // If one of the words is endWord, currentPath is the solution
                 if (wordCandidates.Contains(endWord))
                 {
-                    currentPath.AddLast(endWord);
+                    currentPath.Add(endWord);
                     possiblePaths.Add(currentPath);
                     return;
                 }
-                else
-                {
-                    // remove duplicates from candidates
-                    var realCandidates = wordCandidates.Except(currentPath).ToList();
+                
+                // remove duplicates from candidates
+                var realCandidates = wordCandidates.Except(currentPath).ToList();
 
-                    // add n LinkedLists, one per word found
-                    foreach (string word in realCandidates)
+                // add n new paths, one per word found
+                foreach (string word in realCandidates)
+                {
+                    // copy currentPath
+                    var newPathFound = new List<string>(currentPath)
                     {
-                        // copy currentPath
-                        var newLinkedList = new LinkedList<string>(currentPath);
                         // add word candidate
-                        newLinkedList.AddLast(word);
-                        // add LinkedList
-                        possiblePaths.Add(newLinkedList);
-                    }
-                }
+                        word
+                    };
+                    // add path
+                    possiblePaths.Add(newPathFound);
+                }   
             }
 
             // if we haven't found endWord yet, keep exploring

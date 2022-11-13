@@ -2,7 +2,7 @@
 {
     public class OutputGenerator : IOutputGenerator
     {
-        public async void GenerateOutput(string path, string[] output)
+        public async void GenerateOutput(string path, List<string> output)
         {
             await File.WriteAllLinesAsync(path, output);
         }
