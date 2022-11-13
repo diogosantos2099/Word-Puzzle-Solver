@@ -17,7 +17,10 @@ namespace Word_Puzzle_Solver
         private static string[] RemoveUndesirables(string[] dictionary, int length)
         {
             string[] desiredLengthOnly = RemoveDifferentLength(dictionary, length);
-            string[] desiredWordsOnly = RemoveNonWords(desiredLengthOnly);
+
+            //^[a-zA-Z]+$: allow only upper case and lower case letters
+            string[] desiredWordsOnly = ApplyRegex(desiredLengthOnly, "^[a-zA-Z]+$");
+            
             return desiredWordsOnly;
         }
 
@@ -26,10 +29,9 @@ namespace Word_Puzzle_Solver
             return dictionary.Where(x => x.Length == length).ToArray();
         }
 
-        private static string[] RemoveNonWords(string[] dictionary)
+        private static string[] ApplyRegex(string[] dictionary, string regexExpression)
         {
-            // allow only upper case and lower case letters
-            Regex rgx = new("^[a-zA-Z]+$", RegexOptions.Multiline);
+            Regex rgx = new(regexExpression, RegexOptions.Multiline);
             return dictionary.Where(x => rgx.IsMatch(x)).ToArray();
         }
     }

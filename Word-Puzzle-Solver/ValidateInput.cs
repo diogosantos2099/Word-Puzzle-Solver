@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Word_Puzzle_Solver
+﻿namespace Word_Puzzle_Solver
 {
     /// <summary>
     /// Responsible for validating the input from the user.
