@@ -7,9 +7,9 @@ The program takes 3 arguments:
 - startWord
 - endWord
 
-Objective: from an already available dictionary of words, find the shortest path from startWord to endWord. 
-In each step, the current word must change only 1 character from the previous step.
-Both words should respect the parameterized length in the app.
+Objective: from an already available dictionary of words, find the **shortest path** from startWord to endWord. 
+In each transition, the current word must change only 1 character from the previous one.
+Both words provided as input should respect the parameterized length in the app.
 Examples:
 
 	Input: spin spot
