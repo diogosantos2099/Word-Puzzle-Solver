@@ -11,6 +11,7 @@ Objective: from an already available dictionary of words, find the shortest path
 In each step, the current word must change only 1 character from the previous step.
 Both words should respect the parameterized length in the app.
 Examples:
+
 	Input: spin spot
 	Result: spin->spit->spot
 	
@@ -42,7 +43,7 @@ For each current path in possible paths:
 	3) Evaluate the candidate words.
 	3.a) If no candidate words exist, currentPath is a dead end. 
 	Since we already removed it, nothing more to do. Back to 1).
-    	3.b) If candidate words exist, and one of them is endWord, 
+	3.b) If candidate words exist, and one of them is endWord, 
 	current path is the solution (at least one of). 
 	We are done searching and can return already.
 	3.c) Otherwise, exclude candidate words already present in current path.
@@ -53,14 +54,15 @@ Note: not finding any path is treated as an error.
 
 ## Benchmarks
 ### 'This is Sparta' algorithm
-Time taken: 0:00.005
-Solution:
-spin->spit->spot
+	
+	Time taken: 0:00.005
+	Solution:
+	spin->spit->spot
 
-Time taken: 0:00.245
-Solution:
-same->came->case->cast->cost
+	Time taken: 0:00.245
+	Solution:
+	same->came->case->cast->cost
 
-Time taken: 0:27.104
-Solution:
-kind->find->fond->food->foot->soot->spot
+	Time taken: 0:27.104
+	Solution:
+	kind->find->fond->food->foot->soot->spot
