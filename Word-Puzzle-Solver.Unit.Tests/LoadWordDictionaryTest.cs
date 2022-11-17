@@ -1,6 +1,9 @@
-﻿namespace Word_Puzzle_Solver.Unit.Tests
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Word_Puzzle_Solver.Unit.Tests
 {
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class LoadWordDictionaryTest
     {
         private readonly LoadWordDictionary _loadWordDictionary;

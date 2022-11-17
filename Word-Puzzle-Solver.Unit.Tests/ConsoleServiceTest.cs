@@ -1,16 +1,12 @@
 ﻿using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Word_Puzzle_Solver.Algorithms.Base;
+using System.Diagnostics.CodeAnalysis;
 using Word_Puzzle_Solver.Interfaces;
 using Word_Puzzle_Solver.Models;
 
 namespace Word_Puzzle_Solver.Unit.Tests
 {
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class ConsoleServiceTest
     {
         private readonly Mock<IReadInput> _readInput;
@@ -134,6 +130,12 @@ namespace Word_Puzzle_Solver.Unit.Tests
 
             // act
             await _consoleService.StartAsync(new CancellationToken());
+        }
+
+        [TestMethod]
+        public async Task StopAsync_RunsSuccessfully()
+        {
+            await _consoleService.StopAsync(new CancellationToken());
         }
     }
 }

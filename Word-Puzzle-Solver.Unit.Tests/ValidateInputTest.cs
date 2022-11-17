@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Word_Puzzle_Solver.Interfaces;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace Word_Puzzle_Solver.Unit.Tests
 {
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class ValidateInputTest
     {
         private readonly ValidateInput _validateInput;

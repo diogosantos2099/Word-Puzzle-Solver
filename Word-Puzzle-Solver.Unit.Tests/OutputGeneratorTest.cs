@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace Word_Puzzle_Solver.Unit.Tests
 {
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class OutputGeneratorTest
     {
         private readonly OutputGenerator _outputGenerator;

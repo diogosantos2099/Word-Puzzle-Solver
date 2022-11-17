@@ -1,8 +1,10 @@
+using System.Diagnostics.CodeAnalysis;
 using Word_Puzzle_Solver.Algorithms;
 
 namespace Word_Puzzle_Solver.Unit.Tests.Algorithms
 {
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class ThisIsSpartaAlgorithmTest
     {
         private readonly ThisIsSpartaAlgorithm _explorationAlgorithm;
@@ -47,6 +49,21 @@ namespace Word_Puzzle_Solver.Unit.Tests.Algorithms
             Assert.AreEqual(5, response.Count);
             Assert.IsTrue(response.First().Equals(startWord));
             Assert.IsTrue(response.Last().Equals(endWord));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void CalculateShortestPath_Gone_Dust_ThrowsException()
+        {
+            // arrange
+            // words do not exist in dictionary
+            string startWord = "gone";
+            string endWord = "dust";
+            string[] wordUniverse = { "spin", "shin", "skin", "spit", "spat", "spun", "spot",
+                                        "same", "came", "case", "cast", "cost"};
+
+            // act
+            _explorationAlgorithm.CalculateShortestPath(startWord, endWord, wordUniverse);
         }
 
         [TestMethod]
